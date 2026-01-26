@@ -7,6 +7,7 @@ import Maintenance from './pages/Maintenance';
 import Analytics from './pages/Analytics';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import PTMMonitoring from './pages/PTMMonitoring';
 import MotorDetail from './pages/MotorDetail';
 import VibrationFFT from './pages/VibrationFFT';
 import FaultDiagnosis from './pages/FaultDiagnosis';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/fault-diagnosis-secondary" element={<FaultDiagnosisSecondary />} />
         <Route path="/temperature-trends" element={<TemperatureTrends />} />
         <Route path="/rms-kurtosis" element={<RMSKurtosis />} />
+        <Route path="/PTMMonitoring" element={<PTMMonitoring />} />
       </Routes>
     </Router>
   );

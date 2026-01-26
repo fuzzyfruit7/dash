@@ -6,6 +6,7 @@ import {
   Bell,
   Wrench,
   LineChart,
+  Monitor,
   FileText,
   Settings,
   LogOut,
@@ -36,6 +37,7 @@ export default function Layout({ children }) {
     { icon: Bell, label: 'Alerts', path: '/alerts' },
     { icon: Wrench, label: 'Maintenance', path: '/maintenance' },
     { icon: LineChart, label: 'Analytics', path: '/analytics' },
+    { icon: Monitor, label: 'PTM Monitoring', path: '/PTMMonitoring' },
     { icon: FileText, label: 'Reports', path: '/reports' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
