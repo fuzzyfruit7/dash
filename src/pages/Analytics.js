@@ -43,7 +43,7 @@ export default function Analytics() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-slate-400 text-sm">Avg Fleet Health</p>
+              <p className="text-slate-400 text-sm">Avg Equipment Health</p>
               <TrendingUp size={20} className="text-green-400" />
             </div>
             <p className="text-3xl font-bold text-white">85%</p>
@@ -78,7 +78,7 @@ export default function Analytics() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Health Trend */}
           <Card>
-            <h3 className="text-lg font-semibold mb-4 text-slate-300">Fleet Health Trend</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-300">Equipment Health Trend</h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={healthTrendData}>

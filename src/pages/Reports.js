@@ -4,7 +4,7 @@ import { Card } from '../components/SharedComponents';
 import { FileText, Download, Calendar, Filter, TrendingUp } from 'lucide-react';
 
 const reportsData = [
-  { id: 1, name: 'Monthly Fleet Health Report', date: '2026-01-01', type: 'Monthly', status: 'available', size: '2.4 MB' },
+  { id: 1, name: 'Monthly Equipment Health Report', date: '2026-01-01', type: 'Monthly', status: 'available', size: '2.4 MB' },
   { id: 2, name: 'Maintenance Summary - December', date: '2025-12-31', type: 'Monthly', status: 'available', size: '1.8 MB' },
   { id: 3, name: 'Predictive Maintenance Analysis', date: '2026-01-08', type: 'Weekly', status: 'available', size: '3.2 MB' },
   { id: 4, name: 'Fault Analysis Report', date: '2026-01-05', type: 'Adhoc', status: 'available', size: '1.5 MB' },
