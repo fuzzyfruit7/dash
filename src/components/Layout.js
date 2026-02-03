@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -12,6 +12,7 @@ import {
   LogOut,
   User,
 } from 'lucide-react';
+
 
 const SidebarItem = ({ icon: Icon, label, path, active = false, onClick }) => (
   <div
@@ -27,9 +28,37 @@ const SidebarItem = ({ icon: Icon, label, path, active = false, onClick }) => (
   </div>
 );
 
+
 export default function Layout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  };
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit'
+    });
+  };
 
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
@@ -37,14 +66,16 @@ export default function Layout({ children }) {
     { icon: Bell, label: 'Alerts', path: '/alerts' },
     { icon: Wrench, label: 'Maintenance', path: '/maintenance' },
     { icon: LineChart, label: 'Analytics', path: '/analytics' },
-    { icon: Monitor, label: 'PTM Monitoring', path: '/PTMMonitoring' },
+    { icon: Monitor, label: 'Load Monitoring', path: '/PTMMonitoring' },
     { icon: FileText, label: 'Reports', path: '/reports' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
 
+
   const handleNavigation = (path) => {
     navigate(path);
   };
+
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-200 font-sans flex">
@@ -54,6 +85,13 @@ export default function Layout({ children }) {
           <h1 className="text-xl font-bold text-white">PdM System</h1>
           <p className="text-xs text-slate-400">Amrita Chemicals, Puduchery</p>
         </div>
+        
+        {/* Dynamic Date/Time */}
+        <div className="text-center mb-6 p-3 bg-slate-900 rounded-lg border border-slate-700">
+          <p className="text-white font-medium">{formatTime(currentTime)}</p>
+          <p className="text-xs text-slate-400">{formatDate(currentTime)}</p>
+        </div>
+
         <nav className="space-y-2 flex-1">
           {menuItems.map((item) => (
             <SidebarItem
@@ -79,6 +117,7 @@ export default function Layout({ children }) {
           <SidebarItem icon={LogOut} label="Logout" path="/logout" onClick={() => alert('Logout clicked')} />
         </div>
       </aside>
+
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto">

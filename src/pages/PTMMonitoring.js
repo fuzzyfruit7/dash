@@ -5,13 +5,13 @@ import { Activity, MapPin, AlertTriangle, Droplet, ThermometerSun, Wind, Zap, Fi
 
 const ptmData = [
   {
-    id: 'PTM-001',
-    name: 'Pot Tending Machine Alpha',
-    location: { lat: 20.8550, lng: 85.2084, address: 'Potline 1, Area A' },
+    id: 'BC-1',
+    name: 'Battery Car-1',
+    location: { lat: 20.8550, lng: 85.2084, address: 'Line 1, Area A' },
     status: 'active',
     health: 87,
-    fillPercentage: 68,
-    currentPot: 'P-142',
+    fillStatus: 'Full',
+    currentPot: 'Conveyor-A',
     temperature: 78,
     pressure: 4.2,
     voltage: 420,
@@ -22,17 +22,16 @@ const ptmData = [
     pumpStatus: 'normal',
     chuteStatus: 'normal',
     sensorHealth: 92,
-    feedRate: 145,
     dustLevel: 'low'
   },
   {
-    id: 'PTM-002',
-    name: 'Pot Tending Machine Beta',
-    location: { lat: 20.8555, lng: 85.2090, address: 'Potline 1, Area B' },
+    id: 'BC-2',
+    name: 'Battery Car-2',
+    location: { lat: 20.8555, lng: 85.2090, address: 'Line 1, Area B' },
     status: 'filling',
     health: 92,
-    fillPercentage: 95,
-    currentPot: 'P-387',
+    fillStatus: 'Full',
+    currentPot: 'Mixer-B',
     temperature: 82,
     pressure: 4.5,
     voltage: 435,
@@ -43,17 +42,16 @@ const ptmData = [
     pumpStatus: 'normal',
     chuteStatus: 'normal',
     sensorHealth: 95,
-    feedRate: 152,
     dustLevel: 'moderate'
   },
   {
-    id: 'PTM-003',
-    name: 'Pot Tending Machine Gamma',
-    location: { lat: 20.8560, lng: 85.2095, address: 'Potline 2, Area A' },
+    id: 'BC-3',
+    name: 'Battery Car-3',
+    location: { lat: 20.8560, lng: 85.2095, address: 'Line 2, Area A' },
     status: 'warning',
     health: 64,
-    fillPercentage: 42,
-    currentPot: 'P-523',
+    fillStatus: 'Empty',
+    currentPot: 'Hopper-C',
     temperature: 95,
     pressure: 3.8,
     voltage: 445,
@@ -64,18 +62,17 @@ const ptmData = [
     pumpStatus: 'normal',
     chuteStatus: 'warning',
     sensorHealth: 78,
-    feedRate: 128,
     dustLevel: 'high'
   },
   {
-    id: 'PTM-004',
-    name: 'Pot Tending Machine Delta',
-    location: { lat: 20.8565, lng: 85.2100, address: 'Potline 2, Area B' },
+    id: 'HV-1',
+    name: 'Truck Load 3T',
+    location: { lat: 20.8565, lng: 85.2100, address: 'Line 2, Area B' },
     status: 'critical',
     health: 38,
-    fillPercentage: 15,
-    currentPot: 'P-689',
-    temperature: 102,
+    fillStatus: 'Empty',
+    currentPot: 'Storage-D',
+    temperature: null,
     pressure: 3.2,
     voltage: 468,
     lastMaintenance: '2026-01-10',
@@ -85,18 +82,17 @@ const ptmData = [
     pumpStatus: 'warning',
     chuteStatus: 'critical',
     sensorHealth: 54,
-    feedRate: 95,
     dustLevel: 'high'
   },
   {
-    id: 'PTM-005',
-    name: 'Pot Tending Machine Epsilon',
-    location: { lat: 20.8570, lng: 85.2088, address: 'Potline 3, Area A' },
+    id: 'HV-2',
+    name: 'Truck Load 12T',
+    location: { lat: 20.8570, lng: 85.2088, address: 'Line 3, Area A' },
     status: 'active',
     health: 89,
-    fillPercentage: 73,
-    currentPot: 'P-801',
-    temperature: 75,
+    fillStatus: 'Full',
+    currentPot: 'Tank-E',
+    temperature: null,
     pressure: 4.4,
     voltage: 428,
     lastMaintenance: '2026-01-22',
@@ -106,18 +102,17 @@ const ptmData = [
     pumpStatus: 'normal',
     chuteStatus: 'normal',
     sensorHealth: 94,
-    feedRate: 148,
     dustLevel: 'low'
   },
   {
-    id: 'PTM-006',
-    name: 'Pot Tending Machine Zeta',
-    location: { lat: 20.8575, lng: 85.2105, address: 'Potline 3, Area B' },
+    id: 'HV-3',
+    name: 'Truck Load 12T',
+    location: { lat: 20.8575, lng: 85.2105, address: 'Line 3, Area B' },
     status: 'maintenance',
     health: 72,
-    fillPercentage: 0,
+    fillStatus: 'Empty',
     currentPot: 'N/A',
-    temperature: 65,
+    temperature: null,
     pressure: 0,
     voltage: 0,
     lastMaintenance: '2026-01-26',
@@ -127,7 +122,6 @@ const ptmData = [
     pumpStatus: 'offline',
     chuteStatus: 'offline',
     sensorHealth: 88,
-    feedRate: 0,
     dustLevel: 'low'
   },
 ];
@@ -178,8 +172,8 @@ export default function PTMMonitoring() {
         {/* Header */}
         <header className="flex justify-between items-center mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-white">PTM Monitoring</h2>
-            <p className="text-slate-400">Real-time tracking of 39 Pot Tending Machines</p>
+            <h2 className="text-2xl font-bold text-white">Load Monitoring</h2>
+            <p className="text-slate-400">Real-time tracking of Loaders</p>
           </div>
           <div className="flex gap-2">
             <button 
@@ -196,7 +190,7 @@ export default function PTMMonitoring() {
           <Card>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-slate-400 text-sm">Total PTMs</p>
+                <p className="text-slate-400 text-sm">Total Loaders</p>
                 <p className="text-3xl font-bold text-white">{stats.total}</p>
               </div>
               <Activity size={32} className="text-blue-400" />
@@ -263,16 +257,14 @@ export default function PTMMonitoring() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-800/50 text-slate-400 border-b border-slate-700 text-sm uppercase tracking-wider">
-                  <th className="p-4 font-medium">PTM ID</th>
+                  <th className="p-4 font-medium">Loader ID</th>
                   <th className="p-4 font-medium">Equipment Name</th>
                   <th className="p-4 font-medium">Location</th>
                   <th className="p-4 font-medium">Status</th>
-                  <th className="p-4 font-medium">Current Pot</th>
+                  <th className="p-4 font-medium">Current Eqpt</th>
                   <th className="p-4 font-medium">Health</th>
-                  <th className="p-4 font-medium">Fill %</th>
+                  <th className="p-4 font-medium">Fill</th>
                   <th className="p-4 font-medium">Temp (°C)</th>
-                  <th className="p-4 font-medium">Feed Rate</th>
-                  <th className="p-4 font-medium">Sensors</th>
                   <th className="p-4 font-medium text-center">Action</th>
                 </tr>
               </thead>
@@ -318,43 +310,26 @@ export default function PTMMonitoring() {
                       </div>
                     </td>
                     <td className="p-4">
-                      <div className="flex items-center gap-2">
-                        <Droplet size={16} className="text-blue-400" />
-                        <span className="font-semibold text-sm text-blue-400">{ptm.fillPercentage}%</span>
-                      </div>
+                      <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${
+                        ptm.fillStatus === 'Full' ? 'bg-green-500/10 text-green-400' : 'bg-slate-500/10 text-slate-400'
+                      }`}>
+                        {ptm.fillStatus}
+                      </span>
                     </td>
                     <td className="p-4">
-                      <div className="flex items-center gap-2">
-                        <ThermometerSun 
-                          size={16} 
-                          className={ptm.temperature > 90 ? 'text-red-400' : 'text-orange-400'} 
-                        />
-                        <span className={`font-semibold ${ptm.temperature > 90 ? 'text-red-400' : 'text-slate-200'}`}>
-                          {ptm.temperature}°C
-                        </span>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex items-center gap-2">
-                        <Wind size={16} className="text-green-400" />
-                        <span className="text-slate-200 font-medium text-sm">{ptm.feedRate} kg/min</span>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="space-y-1 text-xs">
+                      {ptm.temperature !== null ? (
                         <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full ${ptm.compressorStatus === 'normal' ? 'bg-green-500' : ptm.compressorStatus === 'warning' ? 'bg-orange-500' : 'bg-red-500'}`} />
-                          <span className="text-slate-400">Comp</span>
+                          <ThermometerSun 
+                            size={16} 
+                            className={ptm.temperature > 90 ? 'text-red-400' : 'text-orange-400'} 
+                          />
+                          <span className={`font-semibold ${ptm.temperature > 90 ? 'text-red-400' : 'text-slate-200'}`}>
+                            {ptm.temperature}°C
+                          </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full ${ptm.pumpStatus === 'normal' ? 'bg-green-500' : ptm.pumpStatus === 'warning' ? 'bg-orange-500' : 'bg-red-500'}`} />
-                          <span className="text-slate-400">Pump</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full ${ptm.chuteStatus === 'normal' ? 'bg-green-500' : ptm.chuteStatus === 'warning' ? 'bg-orange-500' : 'bg-red-500'}`} />
-                          <span className="text-slate-400">Chute</span>
-                        </div>
-                      </div>
+                      ) : (
+                        <span className="text-slate-600">—</span>
+                      )}
                     </td>
                     <td className="p-4">
                       <div className="flex items-center justify-center gap-2">
@@ -409,7 +384,7 @@ export default function PTMMonitoring() {
                       </span>
                     </Card>
                     <Card>
-                      <p className="text-slate-400 text-sm mb-2">Current Pot</p>
+                      <p className="text-slate-400 text-sm mb-2">Current Eqpt</p>
                       <p className="text-xl font-bold text-white">{selectedPTM.currentPot}</p>
                     </Card>
                     <Card>
@@ -419,22 +394,28 @@ export default function PTMMonitoring() {
                       </p>
                     </Card>
                     <Card>
-                      <p className="text-slate-400 text-sm mb-2">Fill Percentage</p>
-                      <p className="text-xl font-bold text-blue-400">{selectedPTM.fillPercentage}%</p>
+                      <p className="text-slate-400 text-sm mb-2">Fill Status</p>
+                      <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${
+                        selectedPTM.fillStatus === 'Full' ? 'bg-green-500/10 text-green-400' : 'bg-slate-500/10 text-slate-400'
+                      }`}>
+                        {selectedPTM.fillStatus}
+                      </span>
                     </Card>
                   </div>
                 </div>
 
                 <div>
                   <h3 className="text-lg font-semibold text-white mb-4">Environmental Parameters</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <Card>
-                      <div className="flex items-center gap-2 mb-2">
-                        <ThermometerSun size={16} className="text-orange-400" />
-                        <p className="text-slate-400 text-sm">Temperature</p>
-                      </div>
-                      <p className="text-xl font-bold text-white">{selectedPTM.temperature}°C</p>
-                    </Card>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {selectedPTM.temperature !== null && (
+                      <Card>
+                        <div className="flex items-center gap-2 mb-2">
+                          <ThermometerSun size={16} className="text-orange-400" />
+                          <p className="text-slate-400 text-sm">Temperature</p>
+                        </div>
+                        <p className="text-xl font-bold text-white">{selectedPTM.temperature}°C</p>
+                      </Card>
+                    )}
                     <Card>
                       <div className="flex items-center gap-2 mb-2">
                         <Activity size={16} className="text-blue-400" />
@@ -507,12 +488,6 @@ export default function PTMMonitoring() {
                           <p className="text-slate-400 mb-1">Anomaly Score</p>
                           <p className={`font-bold ${selectedPTM.anomalyScore > 50 ? 'text-red-400' : selectedPTM.anomalyScore > 25 ? 'text-orange-400' : 'text-green-400'}`}>
                             {selectedPTM.anomalyScore}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-slate-400 mb-1">Sensor Health</p>
-                          <p className={`font-bold ${getHealthColor(selectedPTM.sensorHealth).split(' ')[0]}`}>
-                            {selectedPTM.sensorHealth}%
                           </p>
                         </div>
                       </div>

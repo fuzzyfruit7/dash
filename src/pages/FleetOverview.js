@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { Card, StatusDot, HealthBar } from '../components/SharedComponents';
 import { Filter, Download, RefreshCw, Search, Eye, Edit } from 'lucide-react';
 
+
 // --- Mock Data ---
+
 
 const kpiData = [
   { title: 'Total Motors', value: '52', color: 'text-blue-400' },
@@ -12,6 +14,7 @@ const kpiData = [
   { title: 'Critical', value: '3', color: 'text-red-500' },
   { title: 'Avg Health', value: '84%', color: 'text-blue-400' },
 ];
+
 
 const motorTableData = [
   { id: '203-COM-125A', name: 'Air Compressor-1', status: 'normal', health: 88, rul: '45 days' },
@@ -26,7 +29,36 @@ const motorTableData = [
   { id: 'CF602', name: 'Cooling Fan 2', status: 'critical', health: 38, rul: '5 days' },
 ];
 
+
 export default function FleetOverview() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  };
+
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit'
+    });
+  };
+
   return (
     <Layout>
       <div className="p-6">
@@ -38,8 +70,8 @@ export default function FleetOverview() {
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right hidden md:block">
-              <p className="text-white font-medium">02:44:30 PM</p>
-              <p className="text-xs text-slate-400">Friday, January 09, 2026</p>
+              <p className="text-white font-medium">{formatTime(currentTime)}</p>
+              <p className="text-xs text-slate-400">{formatDate(currentTime)}</p>
             </div>
             <div className="flex gap-2">
               <button className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-3 py-2 rounded-md transition">
@@ -55,6 +87,7 @@ export default function FleetOverview() {
           </div>
         </header>
 
+
         {/* KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
           {kpiData.map((kpi, index) => (
@@ -67,6 +100,7 @@ export default function FleetOverview() {
           ))}
         </div>
 
+
         {/* Search Bar */}
         <div className="relative mb-6">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -78,6 +112,7 @@ export default function FleetOverview() {
             placeholder="Search motors by ID, name, or status..."
           />
         </div>
+
 
         {/* Motor Table */}
         <Card className="p-0 overflow-hidden">
@@ -140,6 +175,7 @@ export default function FleetOverview() {
             </table>
           </div>
         </Card>
+
 
         {/* Pagination */}
         <div className="flex items-center justify-between mt-6">
