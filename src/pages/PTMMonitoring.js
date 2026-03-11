@@ -7,7 +7,7 @@ const ptmData = [
   {
     id: 'BC-1',
     name: 'Battery Car-1',
-    location: { lat: 20.8550, lng: 85.2084, address: 'Line 1, Area A' },
+    location: { lat: 11.946767106712645, lng: 79.80998425866964, address: 'Line 1, Area A' },
     status: 'active',
     health: 87,
     fillStatus: 'Full',
@@ -27,7 +27,7 @@ const ptmData = [
   {
     id: 'BC-2',
     name: 'Battery Car-2',
-    location: { lat: 20.8555, lng: 85.2090, address: 'Line 1, Area B' },
+    location: { lat: 11.9475, lng: 79.8097, address: 'Line 1, Area B' },
     status: 'filling',
     health: 92,
     fillStatus: 'Full',
@@ -47,7 +47,7 @@ const ptmData = [
   {
     id: 'BC-3',
     name: 'Battery Car-3',
-    location: { lat: 20.8560, lng: 85.2095, address: 'Line 2, Area A' },
+    location: { lat: 11.9478, lng: 79.8095, address: 'Line 2, Area A' },
     status: 'warning',
     health: 64,
     fillStatus: 'Empty',
@@ -67,7 +67,7 @@ const ptmData = [
   {
     id: 'HV-1',
     name: 'Truck Load 3T',
-    location: { lat: 20.8565, lng: 85.2100, address: 'Line 2, Area B' },
+    location: { lat: 11.9472, lng: 79.8077, address: 'Line 2, Area B' },
     status: 'critical',
     health: 38,
     fillStatus: 'Empty',
@@ -87,7 +87,7 @@ const ptmData = [
   {
     id: 'HV-2',
     name: 'Truck Load 12T',
-    location: { lat: 20.8570, lng: 85.2088, address: 'Line 3, Area A' },
+    location: { lat: 11.9485, lng: 79.8097, address: 'Line 3, Area A' },
     status: 'active',
     health: 89,
     fillStatus: 'Full',
@@ -107,7 +107,7 @@ const ptmData = [
   {
     id: 'HV-3',
     name: 'Truck Load 12T',
-    location: { lat: 20.8575, lng: 85.2105, address: 'Line 3, Area B' },
+    location: { lat: 11.9470, lng: 79.8077, address: 'Line 3, Area B' },
     status: 'maintenance',
     health: 72,
     fillStatus: 'Empty',
